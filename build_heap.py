@@ -1,14 +1,29 @@
 # python3
-
+# Leons Dolgopolovs 221RDB432
 
 def build_heap(data):
     swaps = []
     # TODO: Creat heap and heap sort
     # try to achieve  O(n) and not O(n2)
-
-
+    n = len(data)
+    for i in range(n // 2, -1, -1):
+        swaps += heapify(data, n, i)
     return swaps
 
+def heapify(data, n, i):
+    left = 2 * i + 1
+    right = 2 * i + 2
+    largest = i
+    if left < n and data[left] < data[largest]:
+        largest = left
+    if right < n and data[right] < data[largest]:
+        largest = right
+    if i != largest:
+        data[i], data[largest] = data[largest], data[i]
+        swaps = [(i, largest)]
+        swaps += heapify(data, n, largest)
+        return swaps
+    return []
 
 def main():
     
